@@ -1,0 +1,75 @@
+import express from 'express'
+import { connectMongo } from './src/config/dbConfig.js';
+import { deleteManyTask, deleteTask, getAllTasks, insertTask, switchTask } from './src/model/TaskModel.js';
+const app = express();
+
+const PORT = 3000;
+
+app.use(express.json());
+
+let fakeDb = [];
+connectMongo();
+
+app.get("/api/v1/task", async(req, res) => {
+    const taskList = await getAllTasks();
+    res.json({
+        status: 'success',
+        message: "Here are the TaskList",
+        taskList,
+    })
+})
+
+app.post("/api/v1/task", async (req, res) => {
+    const result = await insertTask(req.body);
+    console.log(result)
+    res.json({
+        status: 'success',
+        message: "TODO soon post",
+        result
+    })
+})
+
+app.patch("/api/v1/task", async(req, res) => {
+    const {_id, type } = req.body;
+    const result = await switchTask(_id, { type })
+    console.log(req.body, result);
+
+    result?._id
+        ? res.json({
+                status: 'success',
+                message: "TODO soon patch",
+            })
+        : res.json({
+            status: 'error',
+            message: "Error, unable to update the task, try again later",
+        })
+})
+
+// app.delete("/api/v1/task/:_id", async(req, res) => {
+app.delete("/api/v1/task/", async(req, res) => {
+    // const {_id} = req.params;
+    const {ids} = req.body;
+
+    const result = await deleteManyTask(ids);
+    console.log(result);
+    result?.deletedCount
+        ? res.json({
+                status: 'success',
+                message: "All selected tasks has been deleted",
+            })
+        : res.json({
+            status: 'error',
+            message: "Error, unable to update the task, try again later",
+        })
+})
+
+app.get("/", (req, res)=>{
+    
+    res.json({
+        message: "server is running normal",
+    });
+})
+
+app.listen(PORT, (error)=>{
+    error ? console.log(error): console.log("your server is running at http://localhost:" + PORT)
+})

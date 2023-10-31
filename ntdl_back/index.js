@@ -1,11 +1,14 @@
 import express from 'express'
 import { connectMongo } from './src/config/dbConfig.js';
 import { deleteManyTask, deleteTask, getAllTasks, insertTask, switchTask } from './src/model/TaskModel.js';
+import cors from 'cors'
+
 const app = express();
 
-const PORT = 3000;
+const PORT = 8000;
 
 app.use(express.json());
+app.use(cors());
 
 let fakeDb = [];
 connectMongo();
@@ -24,7 +27,7 @@ app.post("/api/v1/task", async (req, res) => {
     console.log(result)
     res.json({
         status: 'success',
-        message: "TODO soon post",
+        message: "New Task is been added",
         result
     })
 })

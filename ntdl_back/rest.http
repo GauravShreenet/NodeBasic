@@ -1,8 +1,8 @@
 ### get request
-GET http://localhost:3000/api/v1/task/
+GET http://localhost:8000/api/v1/task/
 
 ### post request
-POST http://localhost:3000/api/v1/task/
+POST http://localhost:8000/api/v1/task/
 Content-Type: application/json
 
 {
@@ -11,7 +11,7 @@ Content-Type: application/json
 }
 
 ### Patch request
-PATCH http://localhost:3000/api/v1/task/
+PATCH http://localhost:8000/api/v1/task/
 Content-Type: application/json
 
 {
@@ -20,8 +20,8 @@ Content-Type: application/json
 }
 
 ### delete request
-//DELETE http://localhost:3000/api/v1/task/653f25b2e9c951821890eb55
-DELETE http://localhost:3000/api/v1/task/
+//DELETE http://localhost:8000/api/v1/task/653f25b2e9c951821890eb55
+DELETE http://localhost:8000/api/v1/task/
 Content-Type: application/json
 
 {

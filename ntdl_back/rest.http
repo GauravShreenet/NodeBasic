@@ -20,13 +20,20 @@ Content-Type: application/json
 }
 
 ### delete request
-//DELETE http://localhost:8000/api/v1/task/653f25b2e9c951821890eb55
 DELETE http://localhost:8000/api/v1/task/
 Content-Type: application/json
 
 {
-    "ids": [
-        "653f2b33780d273404170be8",
-        "653f2b3a780d273404170bea"
-    ]
+    "_id": "654038c1a88f56c506c6104f"
 }
+
+### delete all request
+# DELETE http://localhost:8000/api/v1/task/
+# Content-Type: application/json
+
+# {
+#     "ids": [
+#         "653f2b33780d273404170be8",
+#         "653f2b3a780d273404170bea"
+#     ]
+# }

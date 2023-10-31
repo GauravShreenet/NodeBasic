@@ -40,7 +40,7 @@ app.patch("/api/v1/task", async(req, res) => {
     result?._id
         ? res.json({
                 status: 'success',
-                message: "TODO soon patch",
+                message: "The task is switched",
             })
         : res.json({
             status: 'error',
@@ -48,23 +48,38 @@ app.patch("/api/v1/task", async(req, res) => {
         })
 })
 
-// app.delete("/api/v1/task/:_id", async(req, res) => {
 app.delete("/api/v1/task/", async(req, res) => {
-    // const {_id} = req.params;
-    const {ids} = req.body;
-
-    const result = await deleteManyTask(ids);
-    console.log(result);
-    result?.deletedCount
+    const {ids: {_id}} = req.body;
+    console.log(req.body)
+    const result = await deleteTask(_id);
+    console.log(result)
+    result?._id
         ? res.json({
-                status: 'success',
-                message: "All selected tasks has been deleted",
-            })
+            status: 'success',
+            message: 'Task deleted',
+        })
         : res.json({
             status: 'error',
-            message: "Error, unable to update the task, try again later",
+            message: "Error, unable to delete the task, try again later",
         })
 })
+
+// app.deleteMany("/api/v1/task/", async(req, res) => {
+//     // const {_id} = req.params;
+//     const {ids} = req.body;
+
+//     const result = await deleteManyTask(ids);
+//     console.log(result);
+//     result?.deletedCount
+//         ? res.json({
+//                 status: 'success',
+//                 message: "All selected tasks has been deleted",
+//             })
+//         : res.json({
+//             status: 'error',
+//             message: "Error, unable to update the task, try again later",
+//         })
+// })
 
 app.get("/", (req, res)=>{
     
